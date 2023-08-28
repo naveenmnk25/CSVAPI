@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArchitecture.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSVAPI.Models;
 
-public partial class CSVDbContext : DbContext
+public partial class CSVDbContext : DbContext, ICSVDbContext
 {
     public CSVDbContext()
     {
@@ -15,11 +16,11 @@ public partial class CSVDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Column> Columns { get; set; }
+    public  DbSet<Column> Columns { get; set; }
 
-    public virtual DbSet<ColumnValue> ColumnValues { get; set; }
+    public  DbSet<ColumnValue> ColumnValues { get; set; }
 
-    public virtual DbSet<Company> Companies { get; set; }
+    public  DbSet<Company> Companies { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Common.Interfaces;
 using CSVAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CSVDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ICSVDbContext>(provider => provider.GetService<CSVDbContext>()!);
 
 var app = builder.Build();
 
