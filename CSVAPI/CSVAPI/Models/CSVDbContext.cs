@@ -21,7 +21,8 @@ public partial class CSVDbContext : DbContext, ICSVDbContext
     public  DbSet<ColumnValue> ColumnValues { get; set; }
 
     public  DbSet<Company> Companies { get; set; }
-
+    public DbSet<QueryResult> QueryResult { get; set; }
+    public DbSet<ExecuteResult> ExecuteResult { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,7 +68,14 @@ public partial class CSVDbContext : DbContext, ICSVDbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.Name).HasMaxLength(100);
         });
-
+        modelBuilder.Entity<QueryResult>(entity =>
+        {
+            entity.HasNoKey();
+        });
+        modelBuilder.Entity<ExecuteResult>(entity =>
+        {
+            entity.HasNoKey();
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

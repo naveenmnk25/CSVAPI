@@ -10,5 +10,7 @@ namespace CleanArchitecture.Application.Common.Interfaces
         DbSet<Column> Columns { get; set; }
         DbSet<ColumnValue> ColumnValues { get; set; }
         DbSet<Company> Companies { get; set; }
+        DbSet<QueryResult> QueryResult { get; set; }
+        DbSet<ExecuteResult> ExecuteResult { get; set; }
     }
 }

@@ -1,10 +1,13 @@
 using CSVAPI.Dto;
 using CSVAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using System.ComponentModel.Design;
+using System.Data;
 using System.Diagnostics.Metrics;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CSVAPI.Controllers
 {
@@ -36,11 +39,8 @@ namespace CSVAPI.Controllers
 
 
                 // Generate JSON output
-                var jsonOutput = GenerateJSONOutput(rows);
-
+                var jsonOutput = (rows).ToList();
                 string jsonText = JsonConvert.SerializeObject(jsonOutput, Formatting.Indented);
-
-
                 return jsonText;
             }
             catch (Exception ex)
@@ -95,6 +95,5 @@ namespace CSVAPI.Controllers
             return groupedOutput;
         }
 
-      
     }
 }
