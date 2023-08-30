@@ -15,9 +15,16 @@ namespace DividendsAPI.Controllers
             int height = 36;
             var captchaCode = Captcha.GenerateCaptchaCode();
             var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
-            //HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
+            HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
+        }
+
+        [HttpPost("validateCaptcha")]
+        public bool ValidateCaptcha(string value)
+        {
+            var result = Captcha.ValidateCaptchaCode(value, HttpContext);
+            return result;
         }
 
         public static class Captcha
